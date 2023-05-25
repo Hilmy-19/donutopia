@@ -40,8 +40,14 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-but">
-                            <a class="nav-link me-md-2" href="#"><ion-icon class="icon" name="person-outline"></ion-icon></a>
+                        <li class="nav-but dropdown">
+                            <a class="nav-link dropdown-toggle me-md-2" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><ion-icon class="icon" name="person-outline"></ion-icon></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="login.php">Login</a>
+                                    <a class="dropdown-item" href="#">Register</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-but">
                             <a class="nav-link" href="#"><ion-icon class="icon" name="bag-outline"></ion-icon></a>

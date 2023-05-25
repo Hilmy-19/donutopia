@@ -2,6 +2,8 @@
 include 'layouts/header.php';
 ?>
 
+<link rel="stylesheet" href="assets/css/index.css">
+
 <main>
     <div class="container">
         <div class="text-center">

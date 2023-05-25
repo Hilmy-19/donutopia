@@ -1,0 +1,66 @@
+body {
+  background-image: url(../image/drip.png);
+  background-color: #ea9c9c;
+  height: 115vh;
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: auto;
+  background-position: center;
+  line-height: 1.5;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.tagline {
+  margin-top: 200px;
+}
+
+.main-product {
+  margin-top: 50px;
+  background-color: #f5f2d4;
+  width: 100%;
+  padding: 20px 0px;
+}
+
+.main-product img {
+  margin-left: 200px;
+  height: auto;
+}
+
+.content-product {
+  /* background-color: white; */
+  max-width: 95%;
+  /* margin: 0 auto; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.content-product img {
+  margin-right: 200px;
+}
+
+.product-text p{
+  color: #7B543E  ;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.product-text {
+  width: 400px;
+}
+
+.product-text h1 {
+  color: #ea9c9c;
+  font-size: 40px;
+  text-transform: capitalize;
+  margin-bottom: 20px;
+}
