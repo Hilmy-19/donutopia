@@ -1,4 +1,4 @@
-<footer class="footer" id="section2">
+<footer class="footer" id="about-us">
         <div class="footer-container">
             <div class="footer-row">
                 <div class="footer-col">

@@ -37,7 +37,7 @@ include 'layouts/header.php';
             </div>
         </div>
     </div>
-    <div id="section1">
+    <div id="product">
         <div class="main-product">
             <div class="text-center">
                 <img src="assets/image/our-product.png" width="300px" style="margin: 20px 0px 40px" alt="">
