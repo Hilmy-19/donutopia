@@ -10,7 +10,7 @@
     <script src="assets/js/bootstrap.bundle.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <title>donutopia</title>
+    <title>login</title>
 </head>
 
 <body>
