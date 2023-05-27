@@ -1,9 +1,9 @@
 <?php
-session_start();
+
 include('server/connection.php');
 
 if (isset($_SESSION['logged_in'])) {
-    header('location: index.php');
+    header('location: admin/index.php');
     exit;
 }
 
@@ -46,9 +46,9 @@ if (isset($_POST['login_btn'])) {
             $_SESSION['logged_in'] = true;
 
 
-            header('location: index.php?message=Logged in successfully');
+            header('location: admin/index.php?message=Logged in successfully');
         } else {
-            header('location: login.php?error=Could not verify your account!');
+            header('location: admin/login.php?error=Could not verify your account!');
         }
     } else {
         header('location: login.php?error=Something went wrong!');
@@ -93,11 +93,6 @@ if (isset($_POST['login_btn'])) {
                             </div>
                             <div class="daftar">
                                 <a href="register.php"> Register</a>
-                            </div>
-                            <div class="error">
-                                <?php if (isset($_GET['error'])) {
-                                    echo $_GET['error'];
-                                } ?>
                             </div>
                         </form>
                     </div>
