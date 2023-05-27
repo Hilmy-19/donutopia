@@ -13,34 +13,31 @@ if (isset($_POST['register_btn'])) {
 
 
 if (isset($_POST['login_btn'])) {
-    $email = $_POST['adm_email'];
-    $password = ($_POST['adm_password']);
+    $adm_email = $_POST['adm_email'];
+    $adm_password = ($_POST['adm_password']);
 
-    $query = "SELECT adm_id, adm_email, adm_password, adm_saldo, FROM admin WHERE adm_email = ? 
+    $query = "SELECT adm_id, adm_email, adm_password, adm_saldo FROM admin WHERE adm_email = ? 
         AND adm_password = ? LIMIT 1";
 
     $stmt_login = $conn->prepare($query);
-    $stmt_login->bind_param('ss', $email, $password);
+    $stmt_login->bind_param('ss', $adm_email, $adm_password);
 
     if ($stmt_login->execute()) {
         $stmt_login->bind_result(
-            $user_id,
-            $user_name,
-            $user_email,
-            $user_password,
-            $user_saldo,
-            $user_photo
+            $adm_id,
+            $adm_email,
+            $adm_password,
+            $adm_saldo,
         );
         $stmt_login->store_result();
 
         if ($stmt_login->num_rows() == 1) {
             $stmt_login->fetch();
 
-            $_SESSION['adm_id'] = $user_id;
-            $_SESSION['adm_name'] = $user_name;
-            $_SESSION['adm_email'] = $user_email;
-            $_SESSION['adm_password'] = $user_password;
-            $_SESSION['adm_saldo'] = $user_phone;
+            $_SESSION['adm_id'] = $adm_id;
+            $_SESSION['adm_email'] = $adm_email;
+            $_SESSION['adm_password'] = $adm_password;
+            $_SESSION['adm_saldo'] = $adm_saldo;
             $_SESSION['logged_in'] = true;
 
 
