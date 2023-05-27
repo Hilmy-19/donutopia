@@ -13,12 +13,11 @@ if (isset($_POST['register_btn'])) {
 
 
 if (isset($_POST['login_btn'])) {
-    $email = $_POST['user_email'];
-    $password = ($_POST['user_password']);
+    $email = $_POST['adm_email'];
+    $password = ($_POST['adm_password']);
 
-    $query = "SELECT user_id, user_email, user_password, user_name, user_saldo,
-        user_photo FROM user WHERE user_email = ? 
-        AND user_password = ? LIMIT 1";
+    $query = "SELECT adm_id, adm_email, adm_password, adm_saldo, FROM admin WHERE adm_email = ? 
+        AND adm_password = ? LIMIT 1";
 
     $stmt_login = $conn->prepare($query);
     $stmt_login->bind_param('ss', $email, $password);
@@ -37,12 +36,11 @@ if (isset($_POST['login_btn'])) {
         if ($stmt_login->num_rows() == 1) {
             $stmt_login->fetch();
 
-            $_SESSION['user_id'] = $user_id;
-            $_SESSION['user_name'] = $user_name;
-            $_SESSION['user_email'] = $user_email;
-            $_SESSION['user_password'] = $user_password;
-            $_SESSION['user_saldo'] = $user_phone;
-            $_SESSION['user_photo'] = $user_photo;
+            $_SESSION['adm_id'] = $user_id;
+            $_SESSION['adm_name'] = $user_name;
+            $_SESSION['adm_email'] = $user_email;
+            $_SESSION['adm_password'] = $user_password;
+            $_SESSION['adm_saldo'] = $user_phone;
             $_SESSION['logged_in'] = true;
 
 
@@ -83,10 +81,10 @@ if (isset($_POST['login_btn'])) {
                         <h5 class="card-title ms-3">Login</h5>
                         <form action="login.php" method="post">
                             <div class="mb-3">
-                                <input type="email" class="form-control rounded-4" name="user_email">
+                                <input type="email" class="form-control rounded-4" name="adm_email">
                             </div>
                             <div class="mb-3">
-                                <input type="password" class="form-control rounded-4" name="user_password">
+                                <input type="password" class="form-control rounded-4" name="adm_password">
                             </div>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <button class="btn me-md-2 rounded-4" type="submit" id="login-btn" name="login_btn">LOGIN</button>
