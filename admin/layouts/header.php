@@ -23,11 +23,11 @@
             <!-- <hr class="h-color mx-2"> -->
 
             <ul class="list-unstyled px-2">
-                <li class="active">
-                    <a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-gauge me-2"></i>Dashboard</a>
+                <li class="">
+                    <a href="index.php" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-gauge me-2"></i>Dashboard</a>
                 </li>
                 <li class="">
-                    <a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-money-bill me-2"></i>Transaction</a>
+                    <a href="transaction.php" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-money-bill me-2"></i>Transaction</a>
                 </li>
                 <li class="">
                     <a href="#side-menu" data-bs-toggle="collapse" class="text-decoration-none px-3 py-2 d-block text-start me-2" aria-current="page">
@@ -37,15 +37,15 @@
                     </a>
                     <ul class="nav collapse ms-1 flex-column" id="side-menu" data-bs-parent="#menu">
                         <li class="nav-item">
-                            <a class="text-decoration-none px-3 py-2 d-block text-start" href="#">Product List</a>
+                            <a class="text-decoration-none px-3 py-2 d-block text-start" href="product-list.php">Product List</a>
                         </li>
                         <li class="nav-item">
-                            <a class="text-decoration-none px-3 py-2 d-block text-start" href="#">Create Product</a>
+                            <a class="text-decoration-none px-3 py-2 d-block text-start" href="create-product.php">Create Product</a>
                         </li>
                     </ul>
                 </li>
                 <li class="">
-                    <a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-users me-2"></i>Customer</a>
+                    <a href="customer.php" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-users me-2"></i>Customer</a>
                 </li>
             </ul>
         </div>

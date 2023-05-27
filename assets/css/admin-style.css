@@ -1,8 +1,11 @@
 @import url("https://font.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 .background{
-    background: #EA9C9C;
+    /* background: #EA9C9C; */
+    background-image: url(../image/bg-admin.png);
     font-family: "Poppins", sans-serif;
+    padding: 0;
+    margin: 0;
 }
 
 #side-nav{
@@ -20,12 +23,18 @@ hr.h-color{
     background: #F5F2D4;
 }
 
-.sidebar li.active{
+/* .sidebar li.active{
     background: #EA9C9C;
     border-radius: 8px;
 }
 
 .sidebar li.active a, .sidebar li.active a:hover{
+    color: #F5F2D4;
+} */
+
+.sidebar li a:hover{
+    background: #EA9C9C;
+    border-radius: 8px;
     color: #F5F2D4;
 }
 
