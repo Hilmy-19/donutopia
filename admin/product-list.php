@@ -14,7 +14,7 @@ include('layouts/header.php');
         </form>
     </div>
 
-    <table class="content-table">
+    <table class="content-table rounded-4">
         <thead>
             <tr>
                 <th>ID</th>
