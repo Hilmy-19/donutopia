@@ -20,7 +20,7 @@ if (isset($_GET['product_id'])) {
     $stmt_edit_product->execute();
     $products = $stmt_edit_product->get_result();
 
-    $query_select_product = "SELECT * FROM products WHERE product_id = ?";
+    $query_select_product = "SELECT * FROM product WHERE product_id = ?";
     $stmt_select_product = $conn->prepare($query_select_product);
     $stmt_select_product->bind_param('i', $product_id);
     $stmt_select_product->execute();
@@ -37,7 +37,7 @@ if (isset($_GET['product_id'])) {
     }
 }
 
-    $query_select_product = "SELECT * FROM products WHERE product_id = ?";
+    $query_select_product = "SELECT * FROM product WHERE product_id = ?";
     $stmt_select_product = $conn->prepare($query_select_product);
     $stmt_select_product->bind_param('i', $product_id);
     $stmt_select_product->execute();
@@ -53,7 +53,7 @@ if (isset($_GET['product_id'])) {
         header('location: product-list.php?fail_update_message=Product not found!');
     }
 
-    $query_select_product = "SELECT * FROM products WHERE product_id = ?";
+    $query_select_product = "SELECT * FROM product WHERE product_id = ?";
     $stmt_select_product = $conn->prepare($query_select_product);
     $stmt_select_product->bind_param('i', $product_id);
     $stmt_select_product->execute();
@@ -81,7 +81,7 @@ if (isset($_POST['update_btn'])) {
         $product_photo = $_FILES['product_photo']['name'];
 
         // Update product with new photo
-        $query_update_product = "UPDATE products SET product_name = ?, product_desc = ?, 
+        $query_update_product = "UPDATE product SET product_name = ?, product_desc = ?, 
             product_price = ?, product_photo = ? WHERE product_id = ?";
 
         $stmt_update_product = $conn->prepare($query_update_product);

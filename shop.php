@@ -19,7 +19,7 @@ include('server/connection.php');
         <div class="row row-cols-1 row-cols-md-4 g-4 mt-3 mb-5">
             <?php foreach ($products as $product) { ?>
             <div class="col">
-                <div class="card h-100 rounded-4 item-shop">
+                <div class="card h-100 rounded-4 shadow item-shop">
                     <div class="item-img rounded-4">
                     <?php echo "<img class='card-img-top' src= 'assets/image/" . $product['product_photo']."'>"; ?>
                     </div>
