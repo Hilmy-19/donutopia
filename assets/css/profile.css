@@ -1,0 +1,55 @@
+body {
+    background-image: url(../image/drip.png);
+    background-color: #ea9c9c;
+    height: 115vh;
+    background-repeat: no-repeat;
+    width: 100%;
+    background-size: auto;
+    background-position: center;
+    line-height: 1.5;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+
+.container1 {
+    max-width: 1000px;
+    margin-left: 500px;
+    min-height: 300px;
+}
+
+.card {
+    margin-top: 80px;
+    background-color: #F5D1D0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: -12px -10px 0px 0px rgba(123,84,62,1);
+    min-height: 200px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile-picture img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+}
+
+.profile-info {
+    margin-left: 40px;
+}
+
+.profile-info h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.profile-info p {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #7B543E;
+}
