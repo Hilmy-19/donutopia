@@ -2,7 +2,7 @@
     include('layouts/header.php');
     include('../server/connection.php');
 
-    $query_products = "SELECT * FROM products";
+    $query_products = "SELECT * FROM product";
 
     $stmt_products = $conn->prepare($query_products);
     $stmt_products->execute();
@@ -57,7 +57,7 @@
     ?>
     <table class="content-table">
         <thead>
-            <tr>
+            <tr class="text-center">
                 <th>ID</th>
                 <th>NAME</th>
                 <th>PRICE</th>
@@ -71,14 +71,14 @@
             <tr>
                 <td><?php echo $product['product_id']; ?></td>
                 <td><?php echo $product['product_name']; ?></td>
-                <td><?php echo $product['product_desc']; ?></td>
                 <td><?php echo $product['product_price']; ?></td>
+                <td><?php echo $product['product_desc']; ?></td>
                 <td class="text-center"><?php echo "<img style='width: 80px; height: 80px;' src= '../assets/image/" . $product['product_photo']."'>"; ?></td>
                 <td class="text-center">
                     <a href="edit-product.php?product_id=<?php echo $product['product_id']; ?>" class="btn btn-info btn-circle">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a href="delete-product.php?product_id=<?php echo $product['product_id']; ?>" class="btn btn-danger btn-circle">
+                    <a href="delete-product.php?product_id=<?php echo $product['product_id']; ?>" class="btn btn-danger btn-circle ms-2">
                         <i class="fas fa-trash-alt"></i>
                     </a>
                 </td>

@@ -1,26 +1,31 @@
 @import url("https://font.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
-.background{
-    /* background: #EA9C9C; */
-    background-image: url(../image/bg-admin.png);
-    font-family: "Poppins", sans-serif;
+.background {
+  /* background: #EA9C9C; */
+  background-image: url(../image/bg-admin.png);
+  background-repeat: repeat;
+  background-attachment: fixed;
+  font-family: "Poppins", sans-serif;
+}
+
+*{
     padding: 0;
     margin: 0;
 }
 
-#side-nav{
-    background: #D3ECE9;
-    min-width: 250px;
-    max-width: 250px;
+#side-nav {
+  background: #d3ece9;
+  min-width: 250px;
+  max-width: 250px;
 }
 
-.content{
-    min-height: 100vh;
-    width: 100%;
+.content {
+  min-height: 100vh;
+  width: 100%;
 }
 
-hr.h-color{
-    background: #F5F2D4;
+hr.h-color {
+  background: #f5f2d4;
 }
 
 /* .sidebar li.active{
@@ -32,25 +37,25 @@ hr.h-color{
     color: #F5F2D4;
 } */
 
-.sidebar li a:hover{
-    background: #EA9C9C;
-    border-radius: 8px;
-    color: #F5F2D4;
+.sidebar li a:hover {
+  background: #ea9c9c;
+  border-radius: 8px;
+  color: #f5f2d4;
 }
 
-.sidebar li a{
-    color: #7B543E;
+.sidebar li a {
+  color: #7b543e;
 }
 
-@media(max-width: 767px){
-    #side-nav{
-        margin-left: -250px;
-        position: fixed;
-        min-height: 100vh;
-        z-index: 1;
-    }
+@media (max-width: 767px) {
+  #side-nav {
+    margin-left: -250px;
+    position: fixed;
+    min-height: 100vh;
+    z-index: 1;
+  }
 
-    #side-nav.actice{
-        margin-left: 0;
-    }
+  #side-nav.actice {
+    margin-left: 0;
+  }
 }

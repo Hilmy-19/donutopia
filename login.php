@@ -15,7 +15,7 @@
 
 <body>
     <div class="container">
-        <div class="card login mb-3 rounded-5" style="max-width: 540px;">
+        <div class="card item-shop login mb-3 rounded-5" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
                     <img src="assets/image/logo-donut.png" width="400px" class="img-fluid rounded-start mt-5 ms-2" alt="...">
@@ -30,6 +30,7 @@
                             <div class="mb-3">
                                 <input type="password" class="form-control rounded-4" id="exampleInputPassword1">
                             </div>
+                            <a href="register.php" class="ms-3 text-decoration-none">Not have an account?</a>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <button class="btn me-md-2 rounded-4" type="button">Login</button>
                             </div>

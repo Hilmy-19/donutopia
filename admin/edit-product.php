@@ -4,14 +4,14 @@ session_start();
 include('layouts/header.php');
 include('../server/connection.php');
 
-if (!isset($_SESSION['admin_logged_in'])) {
-    header('location: login.php');
-}
+// if (!isset($_SESSION['admin_logged_in'])) {
+//     header('location: login.php');
+// }
 
 
 if (isset($_GET['product_id'])) {
     $product_id = $_GET['product_id'];
-    $query_edit_product = "SELECT * FROM products WHERE product_id = ?";
+    $query_edit_product = "SELECT * FROM product WHERE product_id = ?";
     $stmt_edit_product = $conn->prepare($query_edit_product);
     $stmt_edit_product->bind_param('i', $product_id);
     $stmt_edit_product->execute();
