@@ -24,18 +24,21 @@ if (isset($_GET['product_id'])) {
     $product_desc = $_POST["product_desc"];
     $product_price = $_POST["product_price"];
     $product_photo =  $_FILES['image']['name'];
-    move_uploaded_file($_FILES['image']['name'], $path);
+
+    move_uploaded_file($_FILES['image']['tmp_name'], $path);
     
-    $query_update_status = "UPDATE products SET product_name = ?, product_price = ?,
+    
+    $query_update_product = "UPDATE products SET product_name = ?, product_price = ?,
     product_desc = ?, product_photo = ? WHERE product_id = ?";
 
-    $stmt_update_status = $conn->prepare($query_update_status);
-    $stmt_update_status->bind_param('sssss', $product_name, $product_price, $product_desc, $product_photo, $product_id);
 
-    if ($stmt_update_status->execute()) {
-        header('location: product-list.php?success_status=Status has been updated successfully');
+    $stmt_update_product = $conn->prepare($query_update_product);
+    $stmt_update_product->bind_param('ssssi', $product_name, $product_price, $product_desc, $product_photo, $product_id);
+
+    if ($stmt_update_product->execute()) {
+        header('location: product-list.php?success_update_message=Status has been updated successfully');
     } else {
-        header('location: product-list.php?fail_status=Could not update product status!');
+        header('location: product-list.php?fail_update_message=Could not update product status!');
     }
 } else {
     header('location: product-list.php');
@@ -52,7 +55,7 @@ if (isset($_GET['product_id'])) {
 
     <div class="card rounded-5 p-4 w-75 mb-3 cp">
         <div class="card-body">
-            <form class="row g-3" method="post" action="" enctype="multipart/form-data">
+            <form class="row g-3" method="post" action="edit-product.php" enctype="multipart/form-data">
             <?php foreach ($products as $products) { ?>
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label">Product Name</label>
@@ -64,7 +67,7 @@ if (isset($_GET['product_id'])) {
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Product Description</label>
-                    <textarea class="form-control rounded-4" rows="3" name="product_desc" value="<?php echo $products['product_desc']; ?>"></textarea>
+                    <textarea class="form-control rounded-4" rows="3" name="product_desc" ><?php echo $products['product_desc']; ?></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Product Photo</label>
