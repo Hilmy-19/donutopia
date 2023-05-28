@@ -1,5 +1,7 @@
 <?php
 include 'layouts/header.php';
+session_start();
+$user_name = $_SESSION['user_name'];
 ?>
 
 <link rel="stylesheet" href="assets/css/index.css">

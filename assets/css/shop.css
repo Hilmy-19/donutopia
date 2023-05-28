@@ -1,0 +1,36 @@
+body {
+  /* background-image: url(../image/drip.png); */
+  background-color: #ea9c9c;
+  height: 115vh;
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: auto;
+  background-position: center;
+  line-height: 1.5;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.item-shop{
+    background-color: #F5F2D4;
+}
+
+.item-img{
+    background-color: #F5D1D0;
+    margin: 20px;
+}
+
+.card-body h5 p{
+    color: #7B543E;
+}
+
+h6{
+    color: #7B543E;
+    font-weight: bold;
+}
+
+.btn-buy{
+    background-color: #7B543E;
+    color: #F5F2D4;
+}
