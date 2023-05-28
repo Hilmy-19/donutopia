@@ -8,7 +8,7 @@ include 'layouts/header.php';
     <div class="container">
         <div class="card rounded-5 p-4 w-50 mb-3 profile">
             <div class="card-body">
-                <a class="card-title pb-4 text-decoration-none btn-back" href="index.php"><i class="fa-solid fa-arrow-left"></i>Back</a>
+                <a class="card-title pb-4 text-decoration-none btn-back" href="index.php">Back</a>
                 <div class="text-center">
                     <img src="assets/image/profile1.jpg" class="rounded-circle" width="200px" alt="">
                     <h3 class="mt-3">user@gmail.com</h3>

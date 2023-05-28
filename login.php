@@ -78,8 +78,9 @@ if (isset($_POST['login-btn'])) {
     <div class="container">
         <div class="card item-shop login mb-3 rounded-5" style="max-width: 540px;">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="assets/image/logo-donut.png" width="400px" class="img-fluid rounded-start mt-5 ms-2" alt="...">
+                <div class="col-md-4 mt-2">
+                    <a href="index.php" class="text-decoration-none ms-4" style="color: #7B543E;">back</a>
+                    <img src="assets/image/logo-donut.png" width="400px" class="img-fluid rounded-start mt-4 ms-2" alt="...">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">

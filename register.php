@@ -9,22 +9,14 @@ if (isset($_POST['register'])) {
 
     $user_photo = $_FILES['user_photo']['name'];
 
-    move_uploaded_file($FILES['image']['tmp_name'], $path);
+    $q_register = "INSERT INTO user VALUES (null, '$user_email', '$user_password', '$user_name', 0, '$user_photo', 'user')";
 
-    $q_register = "INSERT INTO user (user_email, user_password, user_name, user_photo) VALUES (?,?,?,?)";
+    $r_register = mysqli_query($conn, $q_register);
 
-    $stmt_register = $conn->prepare($q_register);
-
-    $stmt_register->bind_param(
-        'ss',
-        $user_email,
-        $user_password,
-        $user_name,
-        $user_photo
-    );
-
-    if ($stmt_register->execute()) {
-        header('location: register.php?success_create_messagge=Account has been created successfully');
+    if (move_uploaded_file($_FILES['image']['tmp_name'], $path)) {
+        if ($r_register == true) {
+            header('location: register.php?success_create_messagge=Account has been created successfully');
+        }
     } else {
         header('location: register.php?fail_create_messagge=Could not create account');
     }
@@ -48,8 +40,21 @@ if (isset($_POST['register'])) {
     <div class="container">
         <div class="card rounded-5 p-4 w-75 mb-3 regis">
             <div class="card-body">
+                <!-- Alert-->
+                <?php
+                if (isset($_GET['success_create_message'])) {
+                    echo '<div id="alert" class="alert alert-success alert-dismissible fade show mt-4" role="alert">Account created successfully!
+                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+                } else if (isset($_GET['fail_create_message'])) {
+                    echo '<div id="alert" class="alert alert-danger alert-dismissible fade show mt-4" role="alert">Account failed to create!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+                }
+                ?>
+
                 <h5 class="card-title pb-4">Create Your Account</h5>
-                <form class="row g-3" action="register.php" method="post" enctype="multipart/form-data">
+                <form class="row g-3" method="post" enctype="multipart/form-data">
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Email</label>
                         <input type="email" class="form-control rounded-4" name="user_email">
@@ -68,7 +73,7 @@ if (isset($_POST['register'])) {
                     </div>
                     <a href="login.php" class="ms-3 text-decoration-none">Already have account?</a>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button class="btn me-md-4 rounded-4" type="submit" name="regis">Register</button>
+                        <button class="btn me-md-4 rounded-4" type="submit" name="register">Register</button>
                     </div>
                 </form>
             </div>

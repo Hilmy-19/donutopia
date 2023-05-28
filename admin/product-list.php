@@ -9,7 +9,7 @@
     $products = $stmt_products->get_result();
 ?>
 <?php
-$query_products = "SELECT * FROM products";
+$query_products = "SELECT * FROM product";
 
 if (isset($_GET['search'])) {
     $search = $_GET['search'];
