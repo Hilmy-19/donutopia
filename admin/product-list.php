@@ -8,19 +8,31 @@
     $stmt_products->execute();
     $products = $stmt_products->get_result();
 ?>
+<?php
+$query_products = "SELECT * FROM products";
 
+if (isset($_GET['search'])) {
+    $search = $_GET['search'];
+    $query_products .= " WHERE product_name LIKE '%$search%' OR product_price LIKE '%$search%'
+    or product_desc LIKE '%$search%'";
+}
+
+$stmt_products = $conn->prepare($query_products);
+$stmt_products->execute();
+$products = $stmt_products->get_result();
+?>
 
 <link rel="stylesheet" href="../assets/css/admin-product-list.css">
 
 <div class="container">
     <h1>Product List</h1>
     <div class="d-grid gap-2 d-md-flex cari">
-        <form class="d-flex" role="search">
-            <input class="form-control me-2 rounded-4" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" role="search" method="GET" action="">
+            <input class="form-control me-2 rounded-4" type="search" placeholder="Search" aria-label="Search" name="search">
             <button class="btn rounded-4" style="background-color: #7B543E; color: #F5F2D4;" type="submit">Search</button>
         </form>
     </div>
-    <?php 
+    <?php
         if (isset($_GET['success_update_message'])) { 
             echo '<div id="alert" class="alert alert-success alert-dismissible fade show mt-4" role="alert">Product berhasil diperbarui!
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -69,8 +81,8 @@
             <tr>
                 <td><?php echo $product['product_id']; ?></td>
                 <td><?php echo $product['product_name']; ?></td>
-                <td><?php echo $product['product_desc']; ?></td>
                 <td><?php echo $product['product_price']; ?></td>
+                <td><?php echo $product['product_desc']; ?></td>
                 <td class="text-center"><?php echo "<img style='width: 80px; height: 80px;' src= '../assets/image/" . $product['product_photo']."'>"; ?></td>
                 <td class="text-center">
                     <a href="edit-product.php?product_id=<?php echo $product['product_id']; ?>" class="btn btn-info btn-circle">
