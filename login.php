@@ -3,55 +3,58 @@ session_start();
 include('server/connection.php');
 
 if (isset($_SESSION['logged_in'])) {
-    header('location:index.php');
-    exit;
+    if ($_SESSION['user_role'] == 'admin') {
+        header('location: admin/index.php');
+    } else {
+        header('location: index.php');
+    }
 }
 
-if (isset($_POST['login_btn'])) {
-    $akun_email = $_POST['akun_email'];
-    $akun_password = $_POST['akun_password'];
+if (isset($_POST['login-btn'])) {
+    $user_email = $_POST['user_email'];
+    $user_password = $_POST['user_password'];
 
-    $query = "SELECT * FROM akun where akun_email = ? AND akun_password = ? LIMIT 1";
+    $query = "SELECT * FROM user WHERE user_email = ? AND user_password = ? LIMIT 1";
+
     $stmt_login = $conn->prepare($query);
-    $stmt_login->bind_param('ss', $akun_email, $akun_password);
+    $stmt_login->bind_param('ss', $user_email, $user_password);
 
     if ($stmt_login->execute()) {
-        $stmt_login->bind_result(
-            $akun_id,
-            $akun_email,
-            $akun_name,
-            $akun_password,
-            $akun_role,
-            $photo,
-            $akun_saldo
-        );
-
+        $stmt_login->bind_result($user_id, $user_email, $user_password, $user_name, $user_saldo, $user_photo, $user_role);
         $stmt_login->store_result();
+
         if ($stmt_login->num_rows() == 1) {
             $stmt_login->fetch();
+            if ($user_role == 'admin') {
+                $_SESSION['user_id'] = $user_id;
+                $_SESSION['user_email'] = $user_email;
+                $_SESSION['user_password'] = $user_password;
+                $_SESSION['user_name'] = $user_name;
+                $_SESSION['user_saldo'] = $user_saldo;
+                $_SESSION['user_photo'] = $user_photo;
+                $_SESSION['user_role'] = $user_role;
+                $_SESSION['logged_id'] = true;
 
-            $_SESSION['akun_id'] = $akun_id;
-            $_SESSION['akun_email'] = $akun_email;
-            $_SESSION['akun_name'] = $akun_name;
-            $_SESSION['akun_password'] = $akun_password;
-            $_SESSION['akun_role'] = $akun_role;
-            $_SESSION['photo'] = $photo;
-            $_SESSION['akun_saldo'] = $akun_saldo;
-            $_SESSION['logged_in'] = true;
-
-            if ($_SESSION['akun_role'] == "user") {
-                header("location:index.php?login=1");
-            } else if ($_SESSION['akun_role'] == "admin") {
-                header("location:admin/index.php?login=1");
+                header('location: admin/index.php');
             } else {
-                header("location:login.php?error=email atau password salah!");
+                $_SESSION['user_id'] = $user_id;
+                $_SESSION['user_email'] = $user_email;
+                $_SESSION['user_password'] = $user_password;
+                $_SESSION['user_name'] = $user_name;
+                $_SESSION['user_saldo'] = $user_saldo;
+                $_SESSION['user_photo'] = $user_photo;
+                $_SESSION['user_role'] = $user_role;
+                $_SESSION['logged_id'] = true;
+
+                header('location: index.php');
             }
         } else {
-            header("location:login.php");
+            header('location: login.php?success=0&error=Could not verify your account!');
         }
     } else {
-        header("location:login.php?");
+        header('location: login.php?success=0&error=Something went wrong!');
     }
+
 }
 
 ?>
@@ -81,19 +84,16 @@ if (isset($_POST['login_btn'])) {
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title ms-3">Login</h5>
-                        <form method="post">
+                        <form method="POST" action="login.php">
                             <div class="mb-3">
-                                <input type="email" class="form-control rounded-4" name="akun_email">
+                                <input type="text" class="form-control rounded-4" name="user_email">
                             </div>
                             <div class="mb-3">
-                                <input type="password" class="form-control rounded-4" name="akun_password">
+                                <input type="password" class="form-control rounded-4" name="user_password">
                             </div>
                             <a href="register.php" class="ms-3 text-decoration-none">Not have an account?</a>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button class="btn me-md-2 rounded-4" type="submit" id="login-btn" name="login_btn">LOGIN</button>
-                            </div>
-                            <div class="daftar">
-                                <a href="register.php"> Register</a>
+                                <button class="btn me-md-2 rounded-4" type="submit" id="login-btn" name="login-btn">LOGIN</button>
                             </div>
                         </form>
                     </div>
