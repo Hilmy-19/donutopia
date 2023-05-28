@@ -1,12 +1,19 @@
 <?php
-include('layouts/header.php');
+    include('layouts/header.php');
+    include('../server/connection.php');
+
+    $query_products = "SELECT * FROM products";
+
+    $stmt_products = $conn->prepare($query_products);
+    $stmt_products->execute();
+    $products = $stmt_products->get_result();
 ?>
+
 
 <link rel="stylesheet" href="../assets/css/admin-product-list.css">
 
 <div class="container">
     <h1>Product List</h1>
-
     <div class="d-grid gap-2 d-md-flex cari">
         <form class="d-flex" role="search">
             <input class="form-control me-2 rounded-4" type="search" placeholder="Search" aria-label="Search">
@@ -15,6 +22,40 @@ include('layouts/header.php');
     </div>
 
     <table class="content-table rounded-4">
+    <?php 
+        if (isset($_GET['success_update_message'])) { 
+            echo '<div id="alert" class="alert alert-success alert-dismissible fade show mt-4" role="alert">Product berhasil diperbarui!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
+        } else if (isset($_GET['fail_update_message'])) {
+            echo '<div id="alert" class="alert alert-danger alert-dismissible fade show mt-4" role="alert">Terjadi kesalahan
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
+        }                                
+    ?>
+    <?php 
+        if (isset($_GET['success_delete_message'])) { 
+            echo '<div id="alert" class="alert alert-success alert-dismissible fade show mt-4" role="alert">Product berhasil dihapus!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
+        } else if (isset($_GET['fail_delete_message'])) {
+            echo '<div id="alert" class="alert alert-danger alert-dismissible fade show mt-4" role="alert">Terjadi kesalahan
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
+        }                    
+    ?>
+    <?php 
+        if (isset($_GET['success_create_message'])) { 
+            echo '<div id="alert" class="alert alert-success alert-dismissible fade show mt-4" role="alert">Product berhasil ditambahkan!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
+        } else if (isset($_GET['fail_create_message'])) {
+            echo '<div id="alert" class="alert alert-danger alert-dismissible fade show mt-4" role="alert">Terjadi kesalahan
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
+        }                    
+    ?>
+    <table class="content-table">
         <thead>
             <tr>
                 <th>ID</th>
@@ -26,63 +67,29 @@ include('layouts/header.php');
             </tr>
         </thead>
         <tbody>
+        <?php foreach ($products as $product) { ?>
             <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>Hilmy</td>
-                <td>120.000</td>
-                <td>
-                    <img src="../assets/image/donat1.png" width="60px" alt="">
-                </td>
-                <td>
-                    <button class="btn btn-primary me-2"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                <td><?php echo $product['product_id']; ?></td>
+                <td><?php echo $product['product_name']; ?></td>
+                <td><?php echo $product['product_desc']; ?></td>
+                <td><?php echo $product['product_price']; ?></td>
+                <td class="text-center"><?php echo "<img style='width: 80px; height: 80px;' src= '../assets/image/" . $product['product_photo']."'>"; ?></td>
+                <td class="text-center">
+                    <a href="edit-product.php?product_id=<?php echo $product['product_id']; ?>" class="btn btn-info btn-circle">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="delete-product.php?product_id=<?php echo $product['product_id']; ?>" class="btn btn-danger btn-circle">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
                 </td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>2</td>
-                <td>Addien</td>
-                <td>70.000</td>
-                <td>
-                    <img src="../assets/image/donat1.png" width="60px" alt="">
-                </td>
-                <td>
-                    <button class="btn btn-primary me-2"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>3</td>
-                <td>Reihandi</td>
-                <td>210.000</td>
-                <td>
-                    <img src="../assets/image/donat1.png" width="60px" alt="">
-                </td>
-                <td>
-                    <button class="btn btn-primary me-2"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>4</td>
-                <td>Sabrina</td>
-                <td>90.000</td>
-                <td>
-                    <img src="../assets/image/donat1.png" width="60px" alt="">
-                </td>
-                <td>
-                    <button class="btn btn-primary me-2"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
-                </td>
-            </tr>
+        <?php } ?>
         </tbody>
     </table>
-
 </div>
-
+<script src="js/bootstrap.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <?php
 include('layouts/footer.php');
 ?>
