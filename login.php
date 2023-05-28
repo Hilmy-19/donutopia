@@ -1,54 +1,59 @@
 <?php
-
+session_start();
 include('server/connection.php');
 
 if (isset($_SESSION['logged_in'])) {
-    header('location: admin/index.php');
+    header('location:index.php');
     exit;
 }
 
-if (isset($_POST['register_btn'])) {
-    header('location: register.html');
-}
-
-
 if (isset($_POST['login_btn'])) {
-    $adm_email = $_POST['adm_email'];
-    $adm_password = ($_POST['adm_password']);
+    $akun_email = $_POST['akun_email'];
+    $akun_password = $_POST['akun_password'];
 
-    $query = "SELECT adm_id, adm_email, adm_password, adm_saldo FROM admin WHERE adm_email = ? 
-        AND adm_password = ? LIMIT 1";
-
+    $query = "SELECT * FROM akun where akun_email = ? AND akun_password = ? LIMIT 1";
     $stmt_login = $conn->prepare($query);
-    $stmt_login->bind_param('ss', $adm_email, $adm_password);
+    $stmt_login->bind_param('ss', $akun_email, $akun_password);
 
     if ($stmt_login->execute()) {
         $stmt_login->bind_result(
-            $adm_id,
-            $adm_email,
-            $adm_password,
-            $adm_saldo,
+            $akun_id,
+            $akun_email,
+            $akun_name,
+            $akun_password,
+            $akun_role,
+            $photo,
+            $akun_saldo
         );
-        $stmt_login->store_result();
 
+        $stmt_login->store_result();
         if ($stmt_login->num_rows() == 1) {
             $stmt_login->fetch();
 
-            $_SESSION['adm_id'] = $adm_id;
-            $_SESSION['adm_email'] = $adm_email;
-            $_SESSION['adm_password'] = $adm_password;
-            $_SESSION['adm_saldo'] = $adm_saldo;
+            $_SESSION['akun_id'] = $akun_id;
+            $_SESSION['akun_email'] = $akun_email;
+            $_SESSION['akun_name'] = $akun_name;
+            $_SESSION['akun_password'] = $akun_password;
+            $_SESSION['akun_role'] = $akun_role;
+            $_SESSION['photo'] = $photo;
+            $_SESSION['akun_saldo'] = $akun_saldo;
             $_SESSION['logged_in'] = true;
 
-
-            header('location: admin/index.php?message=Logged in successfully');
+            if ($_SESSION['akun_role'] == "user") {
+                header("location:index.php?login=1");
+            } else if ($_SESSION['akun_role'] == "admin") {
+                header("location:admin/index.php?login=1");
+            } else {
+                header("location:login.php?error=email atau password salah!");
+            }
         } else {
-            header('location: admin/login.php?error=Could not verify your account!');
+            header("location:login.php");
         }
     } else {
-        header('location: login.php?error=Something went wrong!');
+        header("location:login.php?");
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -76,12 +81,12 @@ if (isset($_POST['login_btn'])) {
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title ms-3">Login</h5>
-                        <form action="login.php" method="post">
+                        <form method="post">
                             <div class="mb-3">
-                                <input type="email" class="form-control rounded-4" name="adm_email">
+                                <input type="email" class="form-control rounded-4" name="akun_email">
                             </div>
                             <div class="mb-3">
-                                <input type="password" class="form-control rounded-4" name="adm_password">
+                                <input type="password" class="form-control rounded-4" name="akun_password">
                             </div>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <button class="btn me-md-2 rounded-4" type="submit" id="login-btn" name="login_btn">LOGIN</button>
