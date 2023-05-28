@@ -8,15 +8,27 @@
     $stmt_products->execute();
     $products = $stmt_products->get_result();
 ?>
+<?php
+$query_products = "SELECT * FROM products";
 
+if (isset($_GET['search'])) {
+    $search = $_GET['search'];
+    $query_products .= " WHERE product_name LIKE '%$search%' OR product_price LIKE '%$search%'
+    or product_desc LIKE '%$search%'";
+}
+
+$stmt_products = $conn->prepare($query_products);
+$stmt_products->execute();
+$products = $stmt_products->get_result();
+?>
 
 <link rel="stylesheet" href="../assets/css/admin-product-list.css">
 
 <div class="container">
     <h1>Product List</h1>
     <div class="d-grid gap-2 d-md-flex cari">
-        <form class="d-flex" role="search">
-            <input class="form-control me-2 rounded-4" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" role="search" method="GET" action="">
+            <input class="form-control me-2 rounded-4" type="search" placeholder="Search" aria-label="Search" name="search">
             <button class="btn rounded-4" style="background-color: #7B543E; color: #F5F2D4;" type="submit">Search</button>
         </form>
     </div>
