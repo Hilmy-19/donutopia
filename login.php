@@ -5,8 +5,10 @@ include('server/connection.php');
 if (isset($_SESSION['logged_in'])) {
     if ($_SESSION['user_role'] == 'admin') {
         header('location: admin/index.php');
+        exit;
     } else {
         header('location: index.php');
+        exit;
     }
 }
 
@@ -25,36 +27,32 @@ if (isset($_POST['login-btn'])) {
 
         if ($stmt_login->num_rows() == 1) {
             $stmt_login->fetch();
+
+            $_SESSION['user_id'] = $user_id;
+            $_SESSION['user_email'] = $user_email;
+            $_SESSION['user_password'] = $user_password;
+            $_SESSION['user_name'] = $user_name;
+            $_SESSION['user_saldo'] = $user_saldo;
+            $_SESSION['user_photo'] = $user_photo;
+            $_SESSION['user_role'] = $user_role;
+            $_SESSION['logged_id'] = true;
+
             if ($user_role == 'admin') {
-                $_SESSION['user_id'] = $user_id;
-                $_SESSION['user_email'] = $user_email;
-                $_SESSION['user_password'] = $user_password;
-                $_SESSION['user_name'] = $user_name;
-                $_SESSION['user_saldo'] = $user_saldo;
-                $_SESSION['user_photo'] = $user_photo;
-                $_SESSION['user_role'] = $user_role;
-                $_SESSION['logged_id'] = true;
-
                 header('location: admin/index.php');
+            } else if ($user_role == 'user') {
+                header('location: index.php?login=1');
             } else {
-                $_SESSION['user_id'] = $user_id;
-                $_SESSION['user_email'] = $user_email;
-                $_SESSION['user_password'] = $user_password;
-                $_SESSION['user_name'] = $user_name;
-                $_SESSION['user_saldo'] = $user_saldo;
-                $_SESSION['user_photo'] = $user_photo;
-                $_SESSION['user_role'] = $user_role;
-                $_SESSION['logged_id'] = true;
-
-                header('location: index.php');
+                $success = false;
+                header("location: login?error=Email atau password salah!?logined=$success");
             }
         } else {
-            header('location: login.php?success=0&error=Could not verify your account!');
+            $success = false;
+            header("location: login.php?logined=$success");
         }
     } else {
-        header('location: login.php?success=0&error=Something went wrong!');
+        $success = false;
+        header("location: login.php?logined=$success");header("location: login.php?logined=$success");
     }
-
 }
 
 ?>
@@ -85,7 +83,7 @@ if (isset($_POST['login-btn'])) {
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title ms-3">Login</h5>
-                        <form method="POST" action="login.php">
+                        <form method="POST">
                             <div class="mb-3">
                                 <input type="text" class="form-control rounded-4" name="user_email">
                             </div>
@@ -94,7 +92,7 @@ if (isset($_POST['login-btn'])) {
                             </div>
                             <a href="register.php" class="ms-3 text-decoration-none">Not have an account?</a>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button class="btn me-md-2 rounded-4" type="submit" id="login-btn" name="login-btn">LOGIN</button>
+                                <button class="btn me-md-2 rounded-4" type="submit" name="login-btn">LOGIN</button>
                             </div>
                         </form>
                     </div>

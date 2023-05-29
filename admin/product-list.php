@@ -67,7 +67,7 @@ $products = $stmt_products->get_result();
             </div>';
         }                    
     ?>
-    <table class="content-table">
+    <table class="content-table rounded-4">
         <thead>
             <tr class="text-center">
                 <th>ID</th>

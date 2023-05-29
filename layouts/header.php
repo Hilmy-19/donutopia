@@ -1,3 +1,26 @@
+<?php
+include('server/connection.php');
+session_start();
+
+if (isset($_SESSION['logged_in'])) {
+    $user_id = $_SESSION['user_id'];
+    $user_email = $_SESSION['user_email'];
+    $user_name = $_SESSION['user_name'];
+    $user_photo = $_SESSION['user_photo'];
+    $user_role = $_SESSION['user_role'];
+}
+
+if (isset($_GET['logout'])) {
+    if (isset($_SESSION['logged_in'])) {
+        unset($_SESSION['logged_in']);
+        unset($_SESSION['user_id']);
+        header('location: login.php');
+        exit;
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +30,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/index.css">
     <script src="assets/js/bootstrap.bundle.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -39,20 +63,44 @@
                             <a class="nav-link" href="#about-us">About us</a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-but dropdown">
-                            <a class="nav-link dropdown-toggle me-md-2" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><ion-icon class="icon" name="person-outline"></ion-icon></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" href="login.php">Login</a>
-                                    <a class="dropdown-item" href="register.php">Register</a>
+                    <?php if (!isset($_SESSION['logged_in'])) { ?> 
+                        <p>GA LOGIN</p>
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-but dropdown">
+                                <a class="nav-link dropdown-toggle me-md-2" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><ion-icon class="icon" name="person-outline"></ion-icon></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="login.php">Login</a>
+                                        <a class="dropdown-item" href="register.php">Register</a>
+                                        <a class="dropdown-item" href="index.php?logout=1">Log Out</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-but">
+                                <a class="nav-link" href="#"><ion-icon class="icon" name="bag-outline"></ion-icon></a>
+                            </li>
+                        </ul>
+                    <?php  } else if (isset($_SESSION['logged_in'])){ ?>
+                        <?php if ($user_role == 'user') { ?>
+                            <p>LOGIN NIH TOT</p>
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                <li class="nav-but dropdown">
+                                    <a class="nav-link dropdown-toggle me-md-2 mt-1" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                                        <img src="assets/image/profile1.jpg" width="40px" class="rounded-circle" alt="">
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="profile.php">Profile</a>
+                                            <a class="dropdown-item" href="index.php?logout=1">Log Out</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-but">
+                                    <a class="nav-link mt-2" href="#"><ion-icon class="icon" name="bag-outline"></ion-icon></a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="nav-but">
-                            <a class="nav-link" href="#"><ion-icon class="icon" name="bag-outline"></ion-icon></a>
-                        </li>
-                    </ul>
+                        <?php } ?>
+                    <?php } ?>
                 </div>
             </div>
         </nav>
