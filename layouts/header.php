@@ -2,22 +2,11 @@
 include('server/connection.php');
 session_start();
 
-if (isset($_SESSION['logged_in'])) {
-    $user_id = $_SESSION['user_id'];
-    $user_email = $_SESSION['user_email'];
-    $user_name = $_SESSION['user_name'];
-    $user_photo = $_SESSION['user_photo'];
-    $user_role = $_SESSION['user_role'];
-}
+// if (!isset($_SESSION['logged_in'])) {
+//     header('location: login.php');
+// }
 
-if (isset($_GET['logout'])) {
-    if (isset($_SESSION['logged_in'])) {
-        unset($_SESSION['logged_in']);
-        unset($_SESSION['user_id']);
-        header('location: login.php');
-        exit;
-    }
-}
+$user_photo = $_SESSION['user_photo'];
 
 ?>
 
@@ -64,7 +53,6 @@ if (isset($_GET['logout'])) {
                         </li>
                     </ul>
                     <?php if (!isset($_SESSION['logged_in'])) { ?> 
-                        <p>GA LOGIN</p>
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-but dropdown">
                                 <a class="nav-link dropdown-toggle me-md-2" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><ion-icon class="icon" name="person-outline"></ion-icon></a>
@@ -72,7 +60,6 @@ if (isset($_GET['logout'])) {
                                     <li>
                                         <a class="dropdown-item" href="login.php">Login</a>
                                         <a class="dropdown-item" href="register.php">Register</a>
-                                        <a class="dropdown-item" href="index.php?logout=1">Log Out</a>
                                     </li>
                                 </ul>
                             </li>
@@ -80,13 +67,11 @@ if (isset($_GET['logout'])) {
                                 <a class="nav-link" href="#"><ion-icon class="icon" name="bag-outline"></ion-icon></a>
                             </li>
                         </ul>
-                    <?php  } else if (isset($_SESSION['logged_in'])){ ?>
-                        <?php if ($user_role == 'user') { ?>
-                            <p>LOGIN NIH TOT</p>
+                    <?php  } else { ?>
                             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                 <li class="nav-but dropdown">
                                     <a class="nav-link dropdown-toggle me-md-2 mt-1" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">
-                                        <img src="assets/image/profile1.jpg" width="40px" class="rounded-circle" alt="">
+                                        <img src="assets/image/<?php echo $_SESSION['user_photo']; ?>" width="40px" class="rounded-circle" alt="">
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
@@ -99,7 +84,6 @@ if (isset($_GET['logout'])) {
                                     <a class="nav-link mt-2" href="#"><ion-icon class="icon" name="bag-outline"></ion-icon></a>
                                 </li>
                             </ul>
-                        <?php } ?>
                     <?php } ?>
                 </div>
             </div>

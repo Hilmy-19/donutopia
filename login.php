@@ -2,29 +2,26 @@
 session_start();
 include('server/connection.php');
 
-if (isset($_SESSION['logged_in'])) {
-    if ($_SESSION['user_role'] == 'admin') {
-        header('location: admin/index.php');
-        exit;
-    } else {
-        header('location: index.php');
-        exit;
-    }
-}
-
-if (isset($_POST['login-btn'])) {
+if (isset($_POST['login'])) {
     $user_email = $_POST['user_email'];
     $user_password = $_POST['user_password'];
 
     $query = "SELECT * FROM user WHERE user_email = ? AND user_password = ? LIMIT 1";
-
     $stmt_login = $conn->prepare($query);
     $stmt_login->bind_param('ss', $user_email, $user_password);
 
     if ($stmt_login->execute()) {
-        $stmt_login->bind_result($user_id, $user_email, $user_password, $user_name, $user_saldo, $user_photo, $user_role);
-        $stmt_login->store_result();
+        $stmt_login->bind_result(
+            $user_id,
+            $user_email,
+            $user_password,
+            $user_name,
+            $user_saldo,
+            $user_photo,
+            $user_role
+        );
 
+        $stmt_login->store_result();
         if ($stmt_login->num_rows() == 1) {
             $stmt_login->fetch();
 
@@ -35,15 +32,15 @@ if (isset($_POST['login-btn'])) {
             $_SESSION['user_saldo'] = $user_saldo;
             $_SESSION['user_photo'] = $user_photo;
             $_SESSION['user_role'] = $user_role;
-            $_SESSION['logged_id'] = true;
+            $_SESSION['logged_in'] = true;
 
-            if ($user_role == 'admin') {
-                header('location: admin/index.php');
-            } else if ($user_role == 'user') {
-                header('location: index.php?login=1');
+            if ($_SESSION['user_role'] == "user") {
+                header("location: index.php?login=1");
+            } else if ($_SESSION['user_role'] == "admin") {
+                header("location: admin/index.php?login=1");
             } else {
                 $success = false;
-                header("location: login?error=Email atau password salah!?logined=$success");
+                header("location: login.php?logined=$success");
             }
         } else {
             $success = false;
@@ -51,7 +48,7 @@ if (isset($_POST['login-btn'])) {
         }
     } else {
         $success = false;
-        header("location: login.php?logined=$success");header("location: login.php?logined=$success");
+        header("location: login.php?logined=$success");
     }
 }
 
@@ -92,7 +89,7 @@ if (isset($_POST['login-btn'])) {
                             </div>
                             <a href="register.php" class="ms-3 text-decoration-none">Not have an account?</a>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button class="btn me-md-2 rounded-4" type="submit" name="login-btn">LOGIN</button>
+                                <button class="btn me-md-2 rounded-4" type="submit" name="login">LOGIN</button>
                             </div>
                         </form>
                     </div>

@@ -64,7 +64,7 @@
                                 <a class="nav-link dropdown-toggle me-md-2" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">Admin<i class="fa-solid fa-user ms-2"></i></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="../login.php">Log Out</a>
+                                        <a class="dropdown-item" href="../index.php?logout=1">Log Out</a>
                                     </li>
                                 </ul>
                             </li>

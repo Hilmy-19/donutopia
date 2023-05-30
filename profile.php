@@ -1,5 +1,11 @@
 <?php
 include 'layouts/header.php';
+
+$user_email = $_SESSION['user_email'];
+$user_name = $_SESSION['user_name'];
+$user_saldo = $_SESSION['user_saldo'];
+$user_photo = $_SESSION['user_photo'];
+
 ?>
 
 <link rel="stylesheet" href="assets/css/profile.css">
@@ -10,12 +16,12 @@ include 'layouts/header.php';
             <div class="card-body">
                 <a class="card-title pb-4 text-decoration-none btn-back" href="index.php">Back</a>
                 <div class="text-center">
-                    <img src="assets/image/profile1.jpg" class="rounded-circle" width="200px" alt="">
-                    <h3 class="mt-3">user@gmail.com</h3>
+                    <img src="assets/image/<?php echo $_SESSION['user_photo']; ?>" class="rounded-circle" width="200px" alt="">
+                    <h3 class="mt-3"><?php echo $_SESSION['user_email']; ?></h3>
                 </div>
                 <div class="mt-5 ms-5">
-                    <h4>Name : User</h4>
-                    <h4>Balance : 120.000</h4>
+                    <h4>Name : <?php echo $_SESSION['user_name']; ?></h4>
+                    <h4>Balance : <?php echo $_SESSION['user_saldo']; ?></h4>
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button class="btn btn-lg me-md-4 mb-2 rounded-4" type="button" data-bs-toggle="modal" data-bs-target="#topup">Top-Up</button>
