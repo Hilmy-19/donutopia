@@ -2,14 +2,14 @@
     include('layouts/header.php');
     include('../server/connection.php');
 
-    $query_products = "SELECT * FROM products";
+    $query_products = "SELECT * FROM product";
 
     $stmt_products = $conn->prepare($query_products);
     $stmt_products->execute();
     $products = $stmt_products->get_result();
 ?>
 <?php
-$query_products = "SELECT * FROM products";
+$query_products = "SELECT * FROM product";
 
 if (isset($_GET['search'])) {
     $search = $_GET['search'];
@@ -32,7 +32,9 @@ $products = $stmt_products->get_result();
             <button class="btn rounded-4" style="background-color: #7B543E; color: #F5F2D4;" type="submit">Search</button>
         </form>
     </div>
-    <?php
+
+    <table class="content-table rounded-4">
+    <?php 
         if (isset($_GET['success_update_message'])) { 
             echo '<div id="alert" class="alert alert-success alert-dismissible fade show mt-4" role="alert">Product berhasil diperbarui!
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -65,9 +67,9 @@ $products = $stmt_products->get_result();
             </div>';
         }                    
     ?>
-    <table class="content-table">
+    <table class="content-table rounded-4">
         <thead>
-            <tr>
+            <tr class="text-center">
                 <th>ID</th>
                 <th>NAME</th>
                 <th>PRICE</th>
@@ -88,7 +90,7 @@ $products = $stmt_products->get_result();
                     <a href="edit-product.php?product_id=<?php echo $product['product_id']; ?>" class="btn btn-info btn-circle">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a href="delete-product.php?product_id=<?php echo $product['product_id']; ?>" class="btn btn-danger btn-circle">
+                    <a href="delete-product.php?product_id=<?php echo $product['product_id']; ?>" class="btn btn-danger btn-circle ms-2">
                         <i class="fas fa-trash-alt"></i>
                     </a>
                 </td>

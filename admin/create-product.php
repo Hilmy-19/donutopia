@@ -4,14 +4,14 @@ session_start();
 include('layouts/header.php');
 include('../server/connection.php');
 
-if (!isset($_SESSION['admin_logged_in'])) {
-    header('location: login.php');
-}
+// if (!isset($_SESSION['admin_logged_in'])) {
+//     header('location: login.php');
+// }
 ?>
 
 <?php
 if (isset($_POST['create_btn'])) {
-    $path = "images/" . basename($_FILES['image']['name']);
+    $path = "images/" . basename($_FILES['image']['tmp_name']);
     $product_name = $_POST['product_name'];
     $product_desc = $_POST['product_desc'];
     $product_price = $_POST['product_price'];
@@ -24,7 +24,7 @@ if (isset($_POST['create_btn'])) {
     // Upload image
     move_uploaded_file($_FILES['image']['tmp_name'], $path);
     
-    $query_insert_product = "INSERT INTO products (product_name, product_desc, product_price,
+    $query_insert_product = "INSERT INTO product (product_name, product_desc, product_price,
         product_photo) VALUES (?, ?, ?, ?)";
 
     $stmt_insert_product = $conn->prepare($query_insert_product);

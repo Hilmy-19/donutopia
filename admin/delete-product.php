@@ -3,7 +3,7 @@ include '../server/connection.php';
 
 $product_id = $_GET["product_id"];
 
-$query = "DELETE FROM products WHERE product_id = '$product_id'";
+$query = "DELETE FROM product WHERE product_id = '$product_id'";
 $result = mysqli_query($conn, $query);
 
 if ($result) {

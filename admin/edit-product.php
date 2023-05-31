@@ -5,13 +5,22 @@ include('layouts/header.php');
 include('../server/connection.php');
 
 // if (!isset($_SESSION['admin_logged_in'])) {
+//     header('location: login.php');
+// }
+
+// if (!isset($_SESSION['admin_logged_in'])) {
     // header('location: login.php');
 // }
 
 if (isset($_GET['product_id'])) {
     $product_id = $_GET['product_id'];
+    $query_edit_product = "SELECT * FROM product WHERE product_id = ?";
+    $stmt_edit_product = $conn->prepare($query_edit_product);
+    $stmt_edit_product->bind_param('i', $product_id);
+    $stmt_edit_product->execute();
+    $products = $stmt_edit_product->get_result();
 
-    $query_select_product = "SELECT * FROM products WHERE product_id = ?";
+    $query_select_product = "SELECT * FROM product WHERE product_id = ?";
     $stmt_select_product = $conn->prepare($query_select_product);
     $stmt_select_product->bind_param('i', $product_id);
     $stmt_select_product->execute();
@@ -28,6 +37,38 @@ if (isset($_GET['product_id'])) {
     }
 }
 
+    $query_select_product = "SELECT * FROM product WHERE product_id = ?";
+    $stmt_select_product = $conn->prepare($query_select_product);
+    $stmt_select_product->bind_param('i', $product_id);
+    $stmt_select_product->execute();
+    $result_select_product = $stmt_select_product->get_result();
+
+    if ($result_select_product->num_rows > 0) {
+        $row_select_product = $result_select_product->fetch_assoc();
+        $product_name = $row_select_product['product_name'];
+        $product_desc = $row_select_product['product_desc'];
+        $product_price = $row_select_product['product_price'];
+        $product_photo = $row_select_product['product_photo'];
+    } else {
+        header('location: product-list.php?fail_update_message=Product not found!');
+    }
+
+    $query_select_product = "SELECT * FROM product WHERE product_id = ?";
+    $stmt_select_product = $conn->prepare($query_select_product);
+    $stmt_select_product->bind_param('i', $product_id);
+    $stmt_select_product->execute();
+    $result_select_product = $stmt_select_product->get_result();
+
+    if ($result_select_product->num_rows > 0) {
+        $row_select_product = $result_select_product->fetch_assoc();
+        $product_name = $row_select_product['product_name'];
+        $product_desc = $row_select_product['product_desc'];
+        $product_price = $row_select_product['product_price'];
+        $product_photo = $row_select_product['product_photo'];
+    } else {
+        header('location: product-list.php?fail_update_message=Product not found!');
+    }
+
 if (isset($_POST['update_btn'])) {
     $product_id = $_POST['product_id'];
     $product_name = $_POST['product_name'];
@@ -40,7 +81,7 @@ if (isset($_POST['update_btn'])) {
         $product_photo = $_FILES['product_photo']['name'];
 
         // Update product with new photo
-        $query_update_product = "UPDATE products SET product_name = ?, product_desc = ?, 
+        $query_update_product = "UPDATE product SET product_name = ?, product_desc = ?, 
             product_price = ?, product_photo = ? WHERE product_id = ?";
 
         $stmt_update_product = $conn->prepare($query_update_product);
