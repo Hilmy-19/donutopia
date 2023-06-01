@@ -2,7 +2,10 @@
 include('server/connection.php');
 session_start();
 
-$user_photo = $_SESSION['user_photo'];
+if (isset($_SESSION['logged_id'])) {
+    $user_photo = $_SESSION['user_photo'];
+}
+
 
 ?>
 
