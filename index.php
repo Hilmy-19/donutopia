@@ -6,6 +6,7 @@ if (isset($_GET['logout'])) {
         unset($_SESSION['logged_in']);
         unset($_SESSION['user_id']);
         unset($_SESSION['user_role']);
+        unset($_SESSION['cart']);
         header('location: index.php');
         exit;
     }

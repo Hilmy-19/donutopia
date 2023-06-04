@@ -1,0 +1,50 @@
+body {
+    background-image: url(../image/bg-cart.png);
+    background-color: #ea9c9c;
+    height: 115vh;
+    background-repeat: no-repeat;
+    width: 100%;
+    background-size: auto;
+    background-position: center;
+    line-height: 1.5;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cart {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: 90px;
+  }
+
+  .content-table{
+    padding-left: 20px;
+    border-collapse: collapse;
+    margin-left: 90px;
+    font-size: 0.9em;
+    min-width: 1200px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.content-table  thead tr{
+  background-color: #F5D1D0;
+  margin-left: 10px;
+}
+
+.content-table{
+    background-color: #F5F2D4;
+    color: #7B543E;
+    text-align: left;
+    font-weight: bold;
+}
+
+.content-table th,td{
+    padding: 12px 15px;
+}
+
+h5 {
+  font-weight: bold;
+}
