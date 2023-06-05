@@ -1,5 +1,9 @@
 <?php
 include('layouts/header.php');
+
+$q_transaksi = "SELECT transaksi_id, transaksi.user_id, user_name, subtotal from transaksi join user on transaksi.user_id = user.user_id";
+$result = mysqli_query($conn, $q_transaksi);
+
 ?>
 
 <link rel="stylesheet" href="../assets/css/admin-transaction.css">
@@ -24,30 +28,14 @@ include('layouts/header.php');
             </tr>
         </thead>
         <tbody>
+        <?php while ($row = mysqli_fetch_assoc($result)) : ?>
             <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>Hilmy</td>
-                <td>120.000</td>
+                <td><?= $row['transaksi_id']; ?></td>
+                <td><?= $row['user_id']; ?></td>
+                <td><?= $row['user_name']; ?></td>
+                <td><?= $row['subtotal']; ?></td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>2</td>
-                <td>Addien</td>
-                <td>70.000</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>3</td>
-                <td>Reihandi</td>
-                <td>210.000</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>4</td>
-                <td>Sabrina</td>
-                <td>90.000</td>
-            </tr>
+        <?php endwhile ?>
         </tbody>
     </table>
 

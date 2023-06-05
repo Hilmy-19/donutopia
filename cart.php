@@ -8,7 +8,6 @@ if (isset($_GET['product_id'])) {
 
     header('location:cart.php');
 }
-
 ?>
 
 <link rel="stylesheet" href="assets/css/cart.css">
@@ -67,9 +66,30 @@ if (isset($_GET['product_id'])) {
             </tfoot>
         </table>
 
-        <button class="btn btn-lg mt-3 shadow" style="background-color: #7B543E; color:#F5F2D4; margin-left: 1150px;">Checkout</button>
+        <form method="POST">
+            <button class="btn btn-lg mt-3 shadow" name="btn-checkout" style="background-color: #7B543E; color:#F5F2D4; margin-left: 1150px;">Checkout</button>
+        </form>
 
-    <?php } else {
+
+    <?php 
+    
+    if (isset($_POST['btn-checkout'])) {
+        $user_id = $_SESSION['user_id'];
+    
+        $q_transaksi = "INSERT INTO transaksi VALUES (null, $user_id, $grandtotal)";
+    
+        $q_payment = "UPDATE user SET user_saldo = user_saldo - $grandtotal WHERE user_id = $user_id";
+
+        $q_admin = "UPDATE user SET user_saldo = user_saldo + $grandtotal WHERE user_role = 'admin'";
+    
+        $conn->query($q_transaksi);
+        $conn->query($q_payment);
+        $conn->query($q_admin);
+
+        unset($_SESSION['cart']);
+    }
+
+    } else {
         header('location: shop.php');
     } ?>
 
