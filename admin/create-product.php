@@ -1,6 +1,5 @@
 <?php
 ob_start();
-session_start();
 include('layouts/header.php');
 include('../server/connection.php');
 
