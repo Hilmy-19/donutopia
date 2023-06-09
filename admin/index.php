@@ -18,7 +18,7 @@ $row = mysqli_fetch_assoc($result);
 
 $q_saldo = "SELECT user_saldo FROM user WHERE user_role = 'admin'";
 $result2 = mysqli_query($conn, $q_saldo);
-$row2 = mysqli_fetch_assoc($result2)
+$row2 = mysqli_fetch_assoc($result2);
 
 
 $q_transaksi = "SELECT COUNT(*) AS jumlah FROM transaksi";
