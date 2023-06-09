@@ -2,7 +2,10 @@
 include('server/connection.php');
 session_start();
 
-$user_photo = $_SESSION['user_photo'];
+if (isset($_SESSION['logged_id'])) {
+    $user_photo = $_SESSION['user_photo'];
+}
+
 
 ?>
 
@@ -17,6 +20,7 @@ $user_photo = $_SESSION['user_photo'];
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/index.css">
     <script src="assets/js/bootstrap.bundle.js"></script>
+    <script src="https://kit.fontawesome.com/61f8d3e11d.js" crossorigin="anonymous"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <link rel="Website Icon" type="png" href="../assets/image/logo-donut.png">
@@ -59,9 +63,9 @@ $user_photo = $_SESSION['user_photo'];
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-but">
+                            <!-- <li class="nav-but">
                                 <a class="nav-link" href="#"><ion-icon class="icon" name="bag-outline"></ion-icon></a>
-                            </li>
+                            </li> -->
                         </ul>
                     <?php  } else { ?>
                             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -77,7 +81,7 @@ $user_photo = $_SESSION['user_photo'];
                                     </ul>
                                 </li>
                                 <li class="nav-but">
-                                    <a class="nav-link mt-2" href="#"><ion-icon class="icon" name="bag-outline"></ion-icon></a>
+                                    <a class="nav-link mt-2" href="cart.php"><ion-icon class="icon" name="bag-outline"></ion-icon></a>
                                 </li>
                             </ul>
                     <?php } ?>

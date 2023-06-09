@@ -45,8 +45,7 @@ if (isset($_POST['register'])) {
     <div class="container">
         <div class="card rounded-5 p-4 w-75 mb-3 regis">
             <div class="card-body">
-                <h5 class="card-title pb-4">Create Your Account</h5>
-                 <!-- Alert-->
+                <!-- Alert-->
                 <?php
                 if (isset($_GET['success_create_message'])) {
                     echo '<div id="alert" class="alert alert-success alert-dismissible fade show mt-4" role="alert">Account created successfully!
@@ -58,6 +57,8 @@ if (isset($_POST['register'])) {
                     </div>';
                 }
                 ?>
+
+                <h5 class="card-title pb-4">Create Your Account</h5>
                 <form class="row g-3" method="post" enctype="multipart/form-data">
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Email</label>
@@ -72,7 +73,7 @@ if (isset($_POST['register'])) {
                         <input type="text" class="form-control rounded-4" name="user_name">
                     </div>
                     <div class="mb-3">
-                        <label for="formFile" class="form-label">Photo</label>
+                        <label for="formFile" class="form-label">Product Photo</label>
                         <input class="form-control rounded-4" type="file" name="user_photo">
                     </div>
                     <a href="login.php" class="ms-3 text-decoration-none">Already have account?</a>
@@ -83,8 +84,4 @@ if (isset($_POST['register'])) {
             </div>
         </div>
     </div>
-<script src="js/bootstrap.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
-</html>

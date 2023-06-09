@@ -1,10 +1,30 @@
 <?php
 include 'layouts/header.php';
 
+$user_id = $_SESSION['user_id'];
 $user_email = $_SESSION['user_email'];
 $user_name = $_SESSION['user_name'];
 $user_saldo = $_SESSION['user_saldo'];
 $user_photo = $_SESSION['user_photo'];
+
+$query = "SELECT user_saldo from user WHERE user_id = '$user_id'";
+$result = mysqli_query($conn, $query);
+
+$row = mysqli_fetch_assoc($result);
+
+if (isset($_POST['btn-topup'])) {
+    $topup = $_POST['topup'];
+
+    $query = "UPDATE user SET user_saldo = user_saldo + '$topup' WHERE user_id = '$user_id'";
+
+    if (mysqli_query($conn, $query)) {
+        $success = true;
+    } else {
+        $success = false;
+    }
+
+    header("location: profile.php?topup=$success");
+}
 
 ?>
 
@@ -21,7 +41,7 @@ $user_photo = $_SESSION['user_photo'];
                 </div>
                 <div class="mt-5 ms-5">
                     <h4>Name : <?php echo $_SESSION['user_name']; ?></h4>
-                    <h4>Balance : <?php echo $_SESSION['user_saldo']; ?></h4>
+                    <h4>Balance : <?php echo $row['user_saldo']; ?></h4>
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button class="btn btn-lg me-md-4 mb-2 rounded-4" type="button" data-bs-toggle="modal" data-bs-target="#topup">Top-Up</button>
@@ -38,18 +58,19 @@ $user_photo = $_SESSION['user_photo'];
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Top Up Balance</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form method="POST" action="profile.php">
+                    <div class="modal-body">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Enter nominal balance</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" name="topup">
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Top Up</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" name="btn-topup">Top Up</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

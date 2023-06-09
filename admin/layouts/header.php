@@ -1,3 +1,18 @@
+<?php
+include '../server/connection.php';
+session_start();
+
+if (isset($_GET['logout'])) {
+    if (isset($_SESSION['logged_in'])) {
+        unset($_SESSION['logged_in']);
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_role']);
+        header('location: ../index.php');
+        exit;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
