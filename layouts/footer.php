@@ -2,19 +2,19 @@
         <div class="footer-container">
             <div class="footer-row">
                 <div class="footer-col">
-                    <h4>Assignment</h4>
+                    <h4>NRP</h4>
                     <ul>
                         <li>
-                            <a href="">CRUD</a>
+                            <a href="">162021001</a>
                         </li>
                         <li>
-                            <a href="">our services</a>
+                            <a href="">162021008</a>
                         </li>
                         <li>
-                            <a href="">privary policy</a>
+                            <a href="">162021009</a>
                         </li>
                         <li>
-                            <a href="">affliate program</a>
+                            <a href="">162021017</a>
                         </li>
                     </ul>
                 </div>
@@ -39,7 +39,7 @@
                     <h4>Jobdesc</h4>
                     <ul>
                         <li>
-                            <a href="">Frontend & UI</a>
+                            <a href="">Backend Frontend & UI</a>
                         </li>
                         <li>
                             <a href="">Backend</a>
@@ -48,7 +48,7 @@
                             <a href="">Backend</a>
                         </li>
                         <li>
-                            <a href="">Backend</a>
+                            <a href="">Backend Frontend</a>
                         </li>
                     </ul>
                 </div>
