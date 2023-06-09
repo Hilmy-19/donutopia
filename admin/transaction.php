@@ -1,9 +1,5 @@
 <?php
 include('layouts/header.php');
-
-$q_transaksi = "SELECT transaksi_id, transaksi.user_id, user_name, subtotal from transaksi join user on transaksi.user_id = user.user_id";
-$result = mysqli_query($conn, $q_transaksi);
-
 ?>
 
 <link rel="stylesheet" href="../assets/css/admin-transaction.css">
@@ -12,8 +8,8 @@ $result = mysqli_query($conn, $q_transaksi);
     <h1>Transaction</h1>
 
     <div class="d-grid gap-2 d-md-flex cari">
-        <form class="d-flex" role="search">
-            <input class="form-control me-2 rounded-4" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" role="search" method="GET">
+            <input class="form-control me-2 rounded-4" type="search" placeholder="Search" aria-label="Search" name="search">
             <button class="btn rounded-4" style="background-color: #7B543E; color: #F5F2D4;" type="submit">Search</button>
         </form>
     </div>

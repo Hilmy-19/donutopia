@@ -2,6 +2,8 @@
 session_start();
 include('server/connection.php');
 
+
+
 if (isset($_POST['login'])) {
     $user_email = $_POST['user_email'];
     $user_password = $_POST['user_password'];
@@ -82,10 +84,10 @@ if (isset($_POST['login'])) {
                         <h5 class="card-title ms-3">Login</h5>
                         <form method="POST">
                             <div class="mb-3">
-                                <input type="text" class="form-control rounded-4" name="user_email">
+                                <input type="text" class="form-control rounded-4" name="user_email" placeholder="Email">
                             </div>
                             <div class="mb-3">
-                                <input type="password" class="form-control rounded-4" name="user_password">
+                                <input type="password" class="form-control rounded-4" name="user_password" placeholder="Password">
                             </div>
                             <a href="register.php" class="ms-3 text-decoration-none">Not have an account?</a>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
